@@ -1,0 +1,14 @@
+D:\repo\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\bin\Debug\netcoreapp2.2\RestWithASPNETudemy.deps.json
+D:\repo\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\bin\Debug\netcoreapp2.2\RestWithASPNETudemy.runtimeconfig.json
+D:\repo\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\bin\Debug\netcoreapp2.2\RestWithASPNETudemy.runtimeconfig.dev.json
+D:\repo\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\bin\Debug\netcoreapp2.2\RestWithASPNETudemy.dll
+D:\repo\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\bin\Debug\netcoreapp2.2\RestWithASPNETudemy.pdb
+D:\repo\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\obj\Debug\netcoreapp2.2\RestWithASPNETudemy.csprojAssemblyReference.cache
+D:\repo\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\obj\Debug\netcoreapp2.2\RestWithASPNETudemy.csproj.CoreCompileInputs.cache
+D:\repo\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\obj\Debug\netcoreapp2.2\RestWithASPNETudemy.RazorAssemblyInfo.cache
+D:\repo\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\obj\Debug\netcoreapp2.2\RestWithASPNETudemy.RazorAssemblyInfo.cs
+D:\repo\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\obj\Debug\netcoreapp2.2\RestWithASPNETudemy.AssemblyInfoInputs.cache
+D:\repo\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\obj\Debug\netcoreapp2.2\RestWithASPNETudemy.AssemblyInfo.cs
+D:\repo\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\obj\Debug\netcoreapp2.2\RestWithASPNETudemy.RazorTargetAssemblyInfo.cache
+D:\repo\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\obj\Debug\netcoreapp2.2\RestWithASPNETudemy.dll
+D:\repo\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\obj\Debug\netcoreapp2.2\RestWithASPNETudemy.pdb
