@@ -30,6 +30,7 @@ namespace RestWithASPNETudemy
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddApiVersioning();
 
             //services.AddScoped<IPersonService, PersonMockService>();
             services.AddScoped<IPersonService, PersonService>();
