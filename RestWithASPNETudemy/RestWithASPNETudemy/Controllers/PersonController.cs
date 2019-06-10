@@ -52,7 +52,7 @@ namespace RestWithASPNETudemy.Controllers
             return new ObjectResult(_personService.Update(person));
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
             var person = _personService.FindById(id);

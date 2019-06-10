@@ -1,78 +1,76 @@
 ﻿using RestWithASPNETudemy.Models;
+using RestWithASPNETudemy.Models.Context;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RestWithASPNETudemy.Services.Implementation
 {
     public class PersonService : IPersonService
     {
-        private static List<Person> _personsMock = new List<Person>()
+        private MySQLContext _context;
+
+        public PersonService(MySQLContext context)
         {
-            new Person
-            {
-                Id = 1,
-                Firstname = "Fulano",
-                Lastname = "da Silva",
-                Address = "Algum lugar por aí, 111",
-                Gender = "Male"
-            },
-            new Person
-            {
-                Id = 2,
-                Firstname = "Beltrano",
-                Lastname = "da Silva",
-                Address = "Algum lugar por aí, 222",
-                Gender = "Male"
-            },
-            new Person
-            {
-                Id = 3,
-                Firstname = "Ciclana",
-                Lastname = "da Silva",
-                Address = "Algum lugar por aí, 333",
-                Gender = "Female"
-            }
-        };
+            _context = context;
+        }
 
         public Person Create(Person person)
         {
-            person.Id = _personsMock.Count + 1;
+            try
+            {
+                _context.Add(person);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
-            _personsMock.Add(person);
             return person;
         }
 
         public void Delete(long id)
         {
-            var person = _personsMock.Find(p => p.Id == id);
+            var person = _context.Persons.Where(p => p.Id == id).FirstOrDefault();
 
-            if (person != null)
-                _personsMock.Remove(person);
+            try
+            {
+                if (person == null)
+                    throw new Exception($"Pessoa com id {id} não encontrado");
+
+                _context.Persons.Remove(person);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public Person FindById(long id)
         {
-            return _personsMock.Find(p => p.Id == id);
+            var person = _context.Persons.Where(p => p.Id == id).FirstOrDefault();
+
+            return person;
         }
 
         public List<Person> GetAll()
         {
-            return _personsMock;
+            return _context.Persons.ToList();
         }
 
         public Person Update(Person person)
         {
-            var personOri = _personsMock.Find(p => p.Id == person.Id);
+            var personOri = _context.Persons.Where(p => p.Id == person.Id).FirstOrDefault();
 
             if (personOri != null)
             {
-                personOri.Firstname = person.Firstname;
-                personOri.Lastname = person.Lastname;
-                personOri.Address = person.Address;
-                personOri.Gender = person.Gender;
+                _context.Entry(personOri).CurrentValues.SetValues(person);
+                _context.SaveChanges();
             }
 
-            return person;
+            return personOri;
         }
     }
 }
