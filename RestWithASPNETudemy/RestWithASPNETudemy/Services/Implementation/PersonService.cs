@@ -64,10 +64,17 @@ namespace RestWithASPNETudemy.Services.Implementation
         {
             var personOri = _context.Persons.Where(p => p.Id == person.Id).FirstOrDefault();
 
-            if (personOri != null)
+            try
             {
+                if (personOri == null)
+                    throw new Exception($"Pessoa com id {person.Id} não encontrado");
+
                 _context.Entry(personOri).CurrentValues.SetValues(person);
                 _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
             return personOri;

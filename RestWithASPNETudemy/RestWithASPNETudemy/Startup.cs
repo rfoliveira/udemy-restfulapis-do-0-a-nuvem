@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using RestWithASPNETudemy.Models.Context;
 using RestWithASPNETudemy.Services;
 using RestWithASPNETudemy.Services.Implementation;
@@ -12,23 +13,58 @@ namespace RestWithASPNETudemy
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly ILogger _logger;
+        public IHostingEnvironment _environment { get; }
+
+        public Startup(IConfiguration configuration, IHostingEnvironment env, ILogger<Startup> logger)
         {
-            Configuration = configuration;
+            _configuration = configuration;
+            _environment = env;
+            _logger = logger;
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration _configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = Configuration.GetConnectionString("MySQLConnectionString");
+            var connectionString = _configuration.GetConnectionString("MySQLConnectionString");
+
+            if (_environment.IsDevelopment())
+            {
+                try
+                {
+                    // O cara do vídeo usou o pomelo para conectar ao mysql porque no início do asp.net core não tinha
+                    // um driver para mysql nem da M$ nem da oracle (agora tem mas não suporta asp.net core 2.0).
+                    // Dessa forma, dá erro nesta linha pois o compilador identifica tanto o MySqlConnection, quanto o MySqlConnector do pomelo.
+                    // Com isso, foi acrescentado ao csproj um alias para resolver as referencias usando o MySqlConnector.
+                    // Obs.: isso vai ferrar com as demais referências do projeto...tem que fechar e abrir novamente 
+                    // ou mudar para o modo pasta e depois retornar para o modo solution, recarregando o projeto. :-S
+                    var evolveConnection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+
+                    var evolve = new Evolve.Evolve(evolveConnection, msg => _logger.LogInformation(msg))
+                    {
+                        Locations = new[] { "db/migrations" },
+                        IsEraseDisabled = true
+                    };
+
+                    evolve.Migrate();
+                }
+                catch (System.Exception ex)
+                {
+                    _logger.LogCritical("Database migration failed", ex);
+                    throw ex;
+                }
+            }
 
             services.AddDbContext<MySQLContext>(options =>
             {
-                options.UseMySql(connection);
+                options.UseMySql(connectionString);
             });
 
+            // Configuração mínima, (para adicionar autenticação, precisa colocar depois...)
+            //services.AddMvcCore().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            // Configuração normal
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddApiVersioning();
 

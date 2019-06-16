@@ -3,3 +3,4 @@
 ################################################################################
 
 /RestWithASPNETudemy/.vs/RestWithASPNETudemy/v15/Server/sqlite3
+*.sqlite
