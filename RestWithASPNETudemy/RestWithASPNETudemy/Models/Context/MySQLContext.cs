@@ -19,5 +19,6 @@ namespace RestWithASPNETudemy.Models.Context
         }
 
         public DbSet<Person> Persons { get; set; }
+        public DbSet<Book> Books { get; set; }
     }
 }

@@ -5,9 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using RestWithASPNETudemy.Business;
+using RestWithASPNETudemy.Business.Implementation;
 using RestWithASPNETudemy.Models.Context;
-using RestWithASPNETudemy.Services;
-using RestWithASPNETudemy.Services.Implementation;
+using RestWithASPNETudemy.Repository;
+using RestWithASPNETudemy.Repository.Generic;
+using RestWithASPNETudemy.Repository.Implementation;
 
 namespace RestWithASPNETudemy
 {
@@ -69,7 +72,10 @@ namespace RestWithASPNETudemy
             services.AddApiVersioning();
 
             //services.AddScoped<IPersonService, PersonMockService>();
-            services.AddScoped<IPersonService, PersonService>();
+            //services.AddScoped<IPersonService, PersonService>();
+            services.AddScoped<IPersonBusiness, PersonBusiness>();
+            services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

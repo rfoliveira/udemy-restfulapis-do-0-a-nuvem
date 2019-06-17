@@ -14,6 +14,7 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="3.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
     <PackageReference Include="MySql.Data" Version="8.0.16" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
   </ItemGroup>
@@ -35,6 +36,8 @@
   <ItemGroup>
     <None Remove="db\migrations\V1_0_2__Alter_table.sql" />
     <None Remove="db\migrations\V1_0_3__Inserting_Data.sql" />
+    <None Remove="db\migrations\V1_0_4__Create_table_books.sql" />
+    <None Remove="db\migrations\V1_0_6__recreating_books.sql" />
   </ItemGroup>
 
 </Project>

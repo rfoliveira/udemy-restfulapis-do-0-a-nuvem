@@ -1,8 +1,9 @@
-﻿namespace RestWithASPNETudemy.Models
+﻿using RestWithASPNETudemy.Models.Base;
+
+namespace RestWithASPNETudemy.Models
 {
-    public class Person
+    public class Person: BaseEntity
     {
-        public long? Id { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public string Address { get; set; }

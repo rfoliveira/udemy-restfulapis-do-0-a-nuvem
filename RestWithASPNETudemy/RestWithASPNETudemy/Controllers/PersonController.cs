@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RestWithASPNETudemy.Business;
 using RestWithASPNETudemy.Models;
-using RestWithASPNETudemy.Services;
-using System.Collections.Generic;
 
 namespace RestWithASPNETudemy.Controllers
 {
@@ -10,24 +9,24 @@ namespace RestWithASPNETudemy.Controllers
     [Route("api/v{version:apiVersion}/[controller]")]
     public class PersonController : ControllerBase
     {
-        private IPersonService _personService;
+        private IPersonBusiness _personBusiness;
 
-        public PersonController(IPersonService personService)
+        public PersonController(IPersonBusiness personBusiness)
         {
-            _personService = personService;
+            _personBusiness = personBusiness;
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            var persons = _personService.GetAll();
+            var persons = _personBusiness.FindAll();
             return Ok(persons);
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(long id)
         {
-            var person = _personService.FindById(id);
+            var person = _personBusiness.FindById(id);
 
             if (person == null)
                 return NotFound($"Person not found with id {id}");
@@ -41,7 +40,7 @@ namespace RestWithASPNETudemy.Controllers
             if (person == null)
                 return BadRequest("Invalid person");
 
-            return new CreatedResult("", _personService.Create(person));
+            return new CreatedResult("", _personBusiness.Create(person));
         }
 
         [HttpPut]
@@ -50,18 +49,18 @@ namespace RestWithASPNETudemy.Controllers
             if (person == null)
                 return BadRequest("Invalid person");
 
-            return new ObjectResult(_personService.Update(person));
+            return new ObjectResult(_personBusiness.Update(person));
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            var person = _personService.FindById(id);
+            var person = _personBusiness.FindById(id);
 
             if (person == null)
                 return NotFound();
 
-            _personService.Delete(id);
+            _personBusiness.Delete(id);
 
             return NoContent();
         }
