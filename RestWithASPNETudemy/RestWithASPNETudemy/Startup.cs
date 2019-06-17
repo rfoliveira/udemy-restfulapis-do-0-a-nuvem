@@ -74,7 +74,7 @@ namespace RestWithASPNETudemy
             //services.AddScoped<IPersonService, PersonMockService>();
             //services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IPersonBusiness, PersonBusiness>();
-            services.AddScoped<IPersonRepository, PersonRepository>();
+            //services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
         }
 

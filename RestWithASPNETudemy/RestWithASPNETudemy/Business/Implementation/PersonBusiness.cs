@@ -1,14 +1,15 @@
 ﻿using RestWithASPNETudemy.Models;
 using RestWithASPNETudemy.Repository;
+using RestWithASPNETudemy.Repository.Generic;
 using System.Collections.Generic;
 
 namespace RestWithASPNETudemy.Business.Implementation
 {
     public class PersonBusiness: IPersonBusiness
     {
-        private IPersonRepository _repo;
+        private IBaseRepository<Person> _repo;
 
-        public PersonBusiness(IPersonRepository repo)
+        public PersonBusiness(IBaseRepository<Person> repo)
         {
             _repo = repo;
         }
@@ -26,8 +27,8 @@ namespace RestWithASPNETudemy.Business.Implementation
                 else if (string.IsNullOrEmpty(person.Address))
                     throw new System.Exception("Address is required");
 
-                if (_repo.FindByFirstname(person.Firstname) != null)
-                    throw new System.Exception("Firstname already exists");
+                //if (_repo.FindByFirstname(person.Firstname) != null)
+                //    throw new System.Exception("Firstname already exists");
 
                 return _repo.Create(person);
             }
