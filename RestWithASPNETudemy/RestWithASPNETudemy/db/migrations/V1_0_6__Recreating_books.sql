@@ -1,12 +1,11 @@
 ﻿drop table if exists books;
 
 create table if not exists books (
-	id int auto_increment primary_key,
+	id int auto_increment primary key,
 	Author longtext,
 	LaunchDate datetime(6) not null,
 	Price decimal(10,2) not null,
-	Title longtext,
-	primary key(id)
+	Title longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO books (Author, LaunchDate, Price, Title) values ('Autor do livro 1', NOW(), 100.25, 'Título do livro 1');
