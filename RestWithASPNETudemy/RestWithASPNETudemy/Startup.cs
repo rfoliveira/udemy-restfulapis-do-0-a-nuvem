@@ -5,12 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Net.Http.Headers;
 using RestWithASPNETudemy.Business;
 using RestWithASPNETudemy.Business.Implementation;
 using RestWithASPNETudemy.Models.Context;
-using RestWithASPNETudemy.Repository;
 using RestWithASPNETudemy.Repository.Generic;
-using RestWithASPNETudemy.Repository.Implementation;
 
 namespace RestWithASPNETudemy
 {
@@ -68,9 +67,22 @@ namespace RestWithASPNETudemy
             // Configuração mínima, (para adicionar autenticação, precisa colocar depois...)
             //services.AddMvcCore().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             // Configuração normal
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options =>
+            {
+                options.RespectBrowserAcceptHeader = true;
+                options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("text/xml"));
+                options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json"));
+            })
+            .AddXmlSerializerFormatters()
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                
             services.AddApiVersioning();
 
+            RegisterDIContainer(services);
+        }
+
+        private static void RegisterDIContainer(IServiceCollection services)
+        {
             //services.AddScoped<IPersonService, PersonMockService>();
             //services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IPersonBusiness, PersonBusiness>();
