@@ -40,4 +40,8 @@
     <None Remove="db\migrations\V1_0_6__recreating_books.sql" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\Converter\Converters\" />
+  </ItemGroup>
+
 </Project>

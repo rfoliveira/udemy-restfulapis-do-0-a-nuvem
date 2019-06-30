@@ -1,4 +1,6 @@
-﻿using RestWithASPNETudemy.Models;
+﻿using RestWithASPNETudemy.Data.Converter;
+using RestWithASPNETudemy.Data.VO;
+using RestWithASPNETudemy.Models;
 using RestWithASPNETudemy.Repository;
 using RestWithASPNETudemy.Repository.Generic;
 using System.Collections.Generic;
@@ -8,16 +10,19 @@ namespace RestWithASPNETudemy.Business.Implementation
     public class PersonBusiness: IPersonBusiness
     {
         private IBaseRepository<Person> _repo;
+        private readonly PersonConverter _converter;
 
         public PersonBusiness(IBaseRepository<Person> repo)
         {
             _repo = repo;
+            _converter = new PersonConverter();
         }
 
-        public Person Create(Person person)
+        public PersonVO Create(PersonVO person)
         {
             try
             {
+                
                 // Só pra fins de teste apenas, 
                 // em um mundo real a validação consideraria os atributos do objeto
                 if (string.IsNullOrEmpty(person.Firstname))
@@ -30,7 +35,10 @@ namespace RestWithASPNETudemy.Business.Implementation
                 //if (_repo.FindByFirstname(person.Firstname) != null)
                 //    throw new System.Exception("Firstname already exists");
 
-                return _repo.Create(person);
+                var personEntity = _converter.Parse(person);
+                personEntity = _repo.Create(personEntity);
+
+                return _converter.Parse(personEntity);
             }
             catch (System.Exception ex)
             {
@@ -48,19 +56,23 @@ namespace RestWithASPNETudemy.Business.Implementation
             return _repo.Exists(id);
         }
 
-        public List<Person> FindAll()
+        public List<PersonVO> FindAll()
         {
-            return _repo.FindAll();
+            return _converter.ParseList(_repo.FindAll());
         }
 
-        public Person FindById(long id)
+        public PersonVO FindById(long id)
         {
-            return _repo.FindById(id);
+            var personEntity = _repo.FindById(id);
+
+            return _converter.Parse(personEntity);
         }
 
-        public Person Update(Person person)
+        public PersonVO Update(PersonVO person)
         {
-            return _repo.Update(person);
+            var personEntity = _converter.Parse(person);
+            personEntity = _repo.Update(personEntity);
+            return _converter.Parse(personEntity);
         }
     }
 }
