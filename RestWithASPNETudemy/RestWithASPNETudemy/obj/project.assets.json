@@ -4846,6 +4846,18 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
+      },
+      "Tapioca.HATEOAS/1.0.4": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Core": "2.0.4"
+        },
+        "compile": {
+          "lib/netcoreapp2.0/Tapioca.HATEOAS.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/Tapioca.HATEOAS.dll": {}
+        }
       }
     }
   },
@@ -13246,6 +13258,18 @@
         "system.xml.xpath.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xpath.xdocument.nuspec"
       ]
+    },
+    "Tapioca.HATEOAS/1.0.4": {
+      "sha512": "8hp6oNzJV8nbOl6eevAxo0pZsdYIFUng3Pyg0/re47p8e3d0cViG+qmBz3AayrO+CnZ8jqqrkkr264l/8P5QOw==",
+      "type": "package",
+      "path": "tapioca.hateoas/1.0.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netcoreapp2.0/Tapioca.HATEOAS.dll",
+        "tapioca.hateoas.1.0.4.nupkg.sha512",
+        "tapioca.hateoas.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
@@ -13258,7 +13282,8 @@
       "Microsoft.NETCore.App >= 2.2.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.2.3",
       "MySql.Data >= 8.0.16",
-      "Pomelo.EntityFrameworkCore.MySql >= 2.2.0"
+      "Pomelo.EntityFrameworkCore.MySql >= 2.2.0",
+      "Tapioca.HATEOAS >= 1.0.4"
     ]
   },
   "packageFolders": {
@@ -13343,6 +13368,10 @@
           "Pomelo.EntityFrameworkCore.MySql": {
             "target": "Package",
             "version": "[2.2.0, )"
+          },
+          "Tapioca.HATEOAS": {
+            "target": "Package",
+            "version": "[1.0.4, )"
           }
         },
         "imports": [

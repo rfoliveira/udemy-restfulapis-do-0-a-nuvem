@@ -2,6 +2,7 @@
 using RestWithASPNETudemy.Business;
 using RestWithASPNETudemy.Data.VO;
 using RestWithASPNETudemy.Models;
+using Tapioca.HATEOAS;
 
 namespace RestWithASPNETudemy.Controllers
 {
@@ -18,6 +19,7 @@ namespace RestWithASPNETudemy.Controllers
         }
 
         [HttpGet]
+        //[TypeFilter(typeof(HyperMediaFilter))]    //não funcionou...
         public IActionResult Get()
         {
             var persons = _personBusiness.FindAll();
@@ -25,6 +27,7 @@ namespace RestWithASPNETudemy.Controllers
         }
 
         [HttpGet("{id}")]
+        //[TypeFilter(typeof(HyperMediaFilter))]    //não funcionou...
         public IActionResult Get(long id)
         {
             var person = _personBusiness.FindById(id);
@@ -36,6 +39,7 @@ namespace RestWithASPNETudemy.Controllers
         }
 
         [HttpPost]
+        //[TypeFilter(typeof(HyperMediaFilter))]    //não funcionou...
         public IActionResult Post([FromBody] PersonVO person)
         {
             if (person == null)
@@ -45,6 +49,7 @@ namespace RestWithASPNETudemy.Controllers
         }
 
         [HttpPut]
+        //[TypeFilter(typeof(HyperMediaFilter))]    //não funcionou...
         public IActionResult Put([FromBody] PersonVO person)
         {
             if (person == null)
@@ -54,6 +59,7 @@ namespace RestWithASPNETudemy.Controllers
         }
 
         [HttpDelete("{id}")]
+        //[TypeFilter(typeof(HyperMediaFilter))]    //não funcionou...
         public IActionResult Delete(long id)
         {
             var person = _personBusiness.FindById(id);

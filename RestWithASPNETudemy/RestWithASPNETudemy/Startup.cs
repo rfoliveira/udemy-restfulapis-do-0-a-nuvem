@@ -83,6 +83,13 @@ namespace RestWithASPNETudemy
 
         private static void RegisterDIContainer(IServiceCollection services)
         {
+            // Nâo funcionou o HATEOAS configurado como o cara do curso falou...
+            /*
+            var filterOptions = new HyperMediaFilterOptions();
+            filterOptions.ObjectContentResponseEnricherList.Add(new PersonEnricher());
+            services.AddSingleton(filterOptions);
+            */
+
             //services.AddScoped<IPersonService, PersonMockService>();
             //services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IPersonBusiness, PersonBusiness>();
@@ -104,7 +111,13 @@ namespace RestWithASPNETudemy
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "DefaultApi",
+                    template: "{controller=Values}/{id?}"
+                );
+            });
         }
     }
 }
