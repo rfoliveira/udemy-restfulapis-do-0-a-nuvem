@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace RestWithASPNETudemy.Repository.Generic
 {
-    public abstract class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
+    public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
         private readonly MySQLContext _context;
         private DbSet<T> _entity;
@@ -19,7 +19,7 @@ namespace RestWithASPNETudemy.Repository.Generic
             _entity = _context.Set<T>();
         }
 
-        public virtual T Create(T entity)
+        public T Create(T entity)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace RestWithASPNETudemy.Repository.Generic
             return entity;
         }
 
-        public virtual void Delete(long id)
+        public void Delete(long id)
         {            
             try
             {
@@ -52,7 +52,7 @@ namespace RestWithASPNETudemy.Repository.Generic
             }
         }
 
-        public virtual bool Exists(long? id)
+        public bool Exists(long? id)
         {
             return _entity.Any(e => e.Id.Equals(id));
         }
@@ -65,17 +65,17 @@ namespace RestWithASPNETudemy.Repository.Generic
             return FindAll();
         }
 
-        public virtual List<T> FindAll()
+        public List<T> FindAll()
         {
             return _entity.ToList();
         }
 
-        public virtual T FindById(long id)
+        public T FindById(long id)
         {
             return _entity.FirstOrDefault(e => e.Id == id);
         }
 
-        public virtual T Update(T entity)
+        public T Update(T entity)
         {
             var newEntity = _entity.FirstOrDefault(e => e.Id == entity.Id);
 

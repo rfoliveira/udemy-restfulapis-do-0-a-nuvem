@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Repository\Implementation\PersonRepositoryNew.cs" />
     <Compile Remove="Services\Implementation\PersonMockService.cs" />
   </ItemGroup>
 

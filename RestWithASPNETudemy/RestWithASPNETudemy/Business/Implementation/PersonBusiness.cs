@@ -1,7 +1,6 @@
 ﻿using RestWithASPNETudemy.Data.Converter;
 using RestWithASPNETudemy.Data.VO;
 using RestWithASPNETudemy.Models;
-using RestWithASPNETudemy.Repository;
 using RestWithASPNETudemy.Repository.Generic;
 using System.Collections.Generic;
 
@@ -21,8 +20,7 @@ namespace RestWithASPNETudemy.Business.Implementation
         public PersonVO Create(PersonVO person)
         {
             try
-            {
-                
+            {                
                 // Só pra fins de teste apenas, 
                 // em um mundo real a validação consideraria os atributos do objeto
                 if (string.IsNullOrEmpty(person.Firstname))
