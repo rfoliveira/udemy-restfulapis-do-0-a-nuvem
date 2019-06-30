@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -76,7 +77,18 @@ namespace RestWithASPNETudemy
             .AddXmlSerializerFormatters()
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
                 
-            services.AddApiVersioning();
+            services.AddApiVersioning(options => options.ReportApiVersions = true);
+
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            // Ref.: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "RESTful API With ASP.NET Core 2.2",
+                    Version = "v1"
+                });
+            });
 
             RegisterDIContainer(services);
         }
@@ -111,6 +123,21 @@ namespace RestWithASPNETudemy
             }
 
             app.UseHttpsRedirection();
+
+            // Enable middleware to serve generated Swaager as a JSON endpoint
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, CSS, JS, etc)
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = string.Empty;   // To serve the Swagger UI at the app's root (http://localhost:<port>/), set the RoutePrefix property to an empty string
+            });
+
+            var option = new RewriteOptions();
+            option.AddRedirect("^$", "swagger");
+            app.UseRewriter(option);
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
