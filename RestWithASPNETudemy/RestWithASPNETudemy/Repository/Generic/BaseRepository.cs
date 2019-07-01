@@ -10,7 +10,7 @@ namespace RestWithASPNETudemy.Repository.Generic
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        private readonly MySQLContext _context;
+        protected readonly MySQLContext _context;
         private DbSet<T> _entity;
 
         public BaseRepository(MySQLContext context)

@@ -8,7 +8,7 @@ namespace RestWithASPNETudemy.Repository.Implementation
 {
     public class PersonRepository: IPersonRepository
     {
-        private MySQLContext _context;
+        private readonly MySQLContext _context;
 
         public PersonRepository(MySQLContext context)
         {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Rewrite;
@@ -6,11 +7,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 using RestWithASPNETudemy.Business;
 using RestWithASPNETudemy.Business.Implementation;
 using RestWithASPNETudemy.Models.Context;
 using RestWithASPNETudemy.Repository.Generic;
+using RestWithASPNETudemy.Security.Configuration;
+using System;
 
 namespace RestWithASPNETudemy
 {
@@ -89,6 +93,52 @@ namespace RestWithASPNETudemy
                     Version = "v1"
                 });
             });
+
+            #region Configuração de autenticação com JWT
+            //Ref. ok: https://medium.com/@renato.groffe/asp-net-core-2-0-autentica%C3%A7%C3%A3o-em-apis-utilizando-jwt-json-web-tokens-4b1871efd
+            var signingConfiguration = new SigningConfiguration();
+            services.AddSingleton(signingConfiguration);
+
+            var tokenConfiguration = new TokenConfiguration();
+            new ConfigureFromConfigurationOptions<TokenConfiguration>(
+                _configuration.GetSection("TokenConfigurations"))
+                    .Configure(tokenConfiguration);
+            services.AddSingleton(tokenConfiguration);
+
+            services.AddAuthentication(authOptions =>
+            {
+                authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(bearerOptions =>
+                {
+                    var paramsValidation = bearerOptions.TokenValidationParameters;
+                    paramsValidation.IssuerSigningKey = signingConfiguration.Key;
+                    paramsValidation.ValidateAudience = tokenConfiguration.Audience;
+                    paramsValidation.ValidIssuer = tokenConfiguration.Issuer;
+
+                    // Valida a assinatura de um token recebido
+                    paramsValidation.ValidateIssuerSigningKey = true;
+
+                    // Verificação se um token recebido ainda é válido
+                    paramsValidation.ValidateLifetime = true;
+
+                    // Tempo de tolerância para expiração de um token 
+                    // (utilizado caso haja problemas de sincronismo de horário
+                    // entre diferentes computadores envolvidos no processo de comunicação)
+                    paramsValidation.ClockSkew = TimeSpan.Zero;
+                });
+
+            // Ativa o uso do token como forma de autorizar o acesso 
+            // a recursos desse projeto
+            services.AddAuthorization(auth =>
+            {
+                auth.AddPolicy("Bearer", new Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser()
+                    .Build());
+            });
+            #endregion
 
             RegisterDIContainer(services);
         }

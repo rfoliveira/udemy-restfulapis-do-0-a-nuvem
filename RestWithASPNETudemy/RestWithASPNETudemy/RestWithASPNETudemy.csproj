@@ -49,6 +49,7 @@
     <None Remove="db\migrations\V1_0_3__Inserting_Data.sql" />
     <None Remove="db\migrations\V1_0_4__Create_table_books.sql" />
     <None Remove="db\migrations\V1_0_6__recreating_books.sql" />
+    <None Remove="db\migrations\V1_0_7__Create_table_users.sql" />
   </ItemGroup>
 
   <ItemGroup>

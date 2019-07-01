@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestWithASPNETudemy.Business;
 using RestWithASPNETudemy.Data.VO;
-using RestWithASPNETudemy.Models;
-using Tapioca.HATEOAS;
 
 namespace RestWithASPNETudemy.Controllers
 {

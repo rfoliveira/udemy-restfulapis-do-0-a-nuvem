@@ -32,3 +32,4 @@ C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNE
 C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\bin\Debug\netcoreapp2.2\db\migrations\V1_0_3__Inserting_Data.sql
 C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\bin\Debug\netcoreapp2.2\db\migrations\V1_0_5__Inserting_books.sql
 C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\bin\Debug\netcoreapp2.2\db\migrations\V1_0_6__Recreating_books.sql
+C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\bin\Debug\netcoreapp2.2\db\migrations\V1_0_7__Create_table_users.sql
