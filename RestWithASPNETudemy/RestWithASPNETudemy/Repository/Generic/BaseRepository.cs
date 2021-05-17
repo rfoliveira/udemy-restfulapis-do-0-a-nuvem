@@ -13,13 +13,13 @@ namespace RestWithASPNETudemy.Repository.Generic
         protected readonly MySQLContext _context;
         private DbSet<T> _entity;
 
-        public BaseRepository(MySQLContext context)
+        protected BaseRepository(MySQLContext context)
         {
             _context = context;
             _entity = _context.Set<T>();
         }
 
-        public T Create(T entity)
+        public virtual T Create(T entity)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace RestWithASPNETudemy.Repository.Generic
             return entity;
         }
 
-        public void Delete(long id)
+        public virtual void Delete(long id)
         {            
             try
             {
@@ -52,30 +52,30 @@ namespace RestWithASPNETudemy.Repository.Generic
             }
         }
 
-        public bool Exists(long? id)
+        public virtual bool Exists(long? id)
         {
             return _entity.Any(e => e.Id.Equals(id));
         }
 
-        public IEnumerable<T> Find(Expression<Func<T, bool>> filter = null)
+        public virtual IEnumerable<T> Find(Expression<Func<T, bool>> filter = null)
         {
-            if (filter == null)
+            if (filter != null)
                 return _entity.Where(filter);
 
             return FindAll();
         }
 
-        public List<T> FindAll()
+        public virtual List<T> FindAll()
         {
             return _entity.ToList();
         }
 
-        public T FindById(long id)
+        public virtual T FindById(long id)
         {
             return _entity.FirstOrDefault(e => e.Id == id);
         }
 
-        public T Update(T entity)
+        public virtual T Update(T entity)
         {
             var newEntity = _entity.FirstOrDefault(e => e.Id == entity.Id);
 

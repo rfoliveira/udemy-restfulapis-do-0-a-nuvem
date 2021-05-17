@@ -33,3 +33,7 @@ C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNE
 C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\bin\Debug\netcoreapp2.2\db\migrations\V1_0_5__Inserting_books.sql
 C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\bin\Debug\netcoreapp2.2\db\migrations\V1_0_6__Recreating_books.sql
 C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\bin\Debug\netcoreapp2.2\db\migrations\V1_0_7__Create_table_users.sql
+C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\bin\Debug\netcoreapp2.2\appsettings.Development.json
+C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\bin\Debug\netcoreapp2.2\appsettings.json
+C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\bin\Debug\netcoreapp2.2\evolve.json
+C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETudemy\RestWithASPNETudemy\obj\Debug\netcoreapp2.2\RestWithASPNETudemy.genruntimeconfig.cache

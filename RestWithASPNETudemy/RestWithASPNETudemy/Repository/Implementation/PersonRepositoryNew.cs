@@ -5,15 +5,10 @@ using System;
 
 namespace RestWithASPNETudemy.Repository.Implementation
 {
-    public class PersonRepositoryNew : BaseRepository<Person>, IPersonRepository
+    public class PersonRepositoryNew : BaseRepository<Person>, IPersonRepositoryNew
     {
         public PersonRepositoryNew(MySQLContext context) : base(context)
         {
-        }
-
-        public bool Exists(long id)
-        {
-            throw new NotImplementedException();
         }
 
         public Person FindByFirstname(string firstName)

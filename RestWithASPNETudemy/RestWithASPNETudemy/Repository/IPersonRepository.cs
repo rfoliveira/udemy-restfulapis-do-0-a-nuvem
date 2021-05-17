@@ -10,8 +10,6 @@ namespace RestWithASPNETudemy.Repository
         List<Person> FindAll();
         Person Update(Person person);
         void Delete(long id);
-
-        Person FindByFirstname(string firstName);
         bool Exists(long id);
     }
 }

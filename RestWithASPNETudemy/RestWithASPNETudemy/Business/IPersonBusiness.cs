@@ -11,7 +11,6 @@ namespace RestWithASPNETudemy.Business
         List<PersonVO> FindAll();
         PersonVO Update(PersonVO person);
         void Delete(long id);
-
         bool Exists(long id);
     }
 }

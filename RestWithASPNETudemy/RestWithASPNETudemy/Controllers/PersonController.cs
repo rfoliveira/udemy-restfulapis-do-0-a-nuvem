@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using RestWithASPNETudemy.Business;
 using RestWithASPNETudemy.Data.VO;
 
@@ -9,10 +10,12 @@ namespace RestWithASPNETudemy.Controllers
     [Route("api/v{version:apiVersion}/[controller]")]
     public class PersonController : ControllerBase
     {
+        private readonly ILogger<PersonController> _logger;
         private IPersonBusiness _personBusiness;
 
-        public PersonController(IPersonBusiness personBusiness)
+        public PersonController(ILogger<PersonController> logger, IPersonBusiness personBusiness)
         {
+            _logger = logger;
             _personBusiness = personBusiness;
         }
 

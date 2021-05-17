@@ -39,6 +39,7 @@ namespace RestWithASPNETudemy
 
             if (_environment.IsDevelopment())
             {
+                #region Configuração do migrations do Evolve
                 try
                 {
                     // O cara do vídeo usou o pomelo para conectar ao mysql porque no início do asp.net core não tinha
@@ -62,6 +63,7 @@ namespace RestWithASPNETudemy
                     _logger.LogCritical("Database migration failed", ex);
                     throw ex;
                 }
+                #endregion
             }
 
             services.AddDbContext<MySQLContext>(options =>
