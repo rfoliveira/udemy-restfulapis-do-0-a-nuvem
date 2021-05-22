@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "GIbG4DBVoFFgwtI2SIVMsVBqzAPhIngMKoNY4w3DIDahPEwLccwvtqp+HdRBJBdkgH5LmvZkvs/gV0ZuK1+r4Q==",
+  "dgSpecHash": "BwdN7LWwoRT5G4xzPUbWey7ej/f3ejTDY+2k/5Jdoqd5ZJP7Ywn6bQGkU1TXuNEVUtJOmKLkvRV2am34JWwtcw==",
   "success": true,
   "projectFilePath": "C:\\cursos\\udemy\\udemy-restfulapis-do-0-a-nuvem\\RestWithASPNETUdemy\\RestWithASPNETUdemy.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\Rafael Oliveira\\.nuget\\packages\\k4os.compression.lz4\\1.1.11\\k4os.compression.lz4.1.1.11.nupkg.sha512",
     "C:\\Users\\Rafael Oliveira\\.nuget\\packages\\k4os.compression.lz4.streams\\1.1.11\\k4os.compression.lz4.streams.1.1.11.nupkg.sha512",
     "C:\\Users\\Rafael Oliveira\\.nuget\\packages\\k4os.hash.xxhash\\1.0.6\\k4os.hash.xxhash.1.0.6.nupkg.sha512",
+    "C:\\Users\\Rafael Oliveira\\.nuget\\packages\\microsoft.aspnetcore.mvc.versioning\\5.0.0\\microsoft.aspnetcore.mvc.versioning.5.0.0.nupkg.sha512",
     "C:\\Users\\Rafael Oliveira\\.nuget\\packages\\microsoft.entityframeworkcore\\5.0.5\\microsoft.entityframeworkcore.5.0.5.nupkg.sha512",
     "C:\\Users\\Rafael Oliveira\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.5\\microsoft.entityframeworkcore.abstractions.5.0.5.nupkg.sha512",
     "C:\\Users\\Rafael Oliveira\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\5.0.5\\microsoft.entityframeworkcore.analyzers.5.0.5.nupkg.sha512",

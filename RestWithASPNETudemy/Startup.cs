@@ -20,17 +20,27 @@ namespace RestWithASPNETUdemy
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment Environment { get; }
 
-        public Startup(IConfiguration configuration, IWebHostEnvironment env, ILogger<Startup> logger)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
             Environment = env;
-            _logger = logger;
+            
+            var loggerFactory = LoggerFactory.Create(builder => 
+            {
+                builder.SetMinimumLevel(LogLevel.Information);
+                builder.AddConsole();
+                builder.AddEventSourceLogger();
+            });
+
+            _logger = loggerFactory.CreateLogger<Startup>();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Senha de root no mysql local = p@$$w0rd
             var connectionString = Configuration.GetConnectionString("MySQLConnectionString");
+            _logger.Log(LogLevel.Information, $"ConnectionString = {connectionString}");
 
             if (Environment.IsDevelopment())
             {
@@ -91,8 +101,7 @@ namespace RestWithASPNETUdemy
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-                
+                app.UseDeveloperExceptionPage();                
             }
 
             app.UseSwagger();

@@ -46,3 +46,11 @@ C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\obj\Debug\net
 C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\obj\Debug\net5.0\ref\RestWithASPNETUdemy.dll
 C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\obj\Debug\net5.0\RestWithASPNETUdemy.pdb
 C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\obj\Debug\net5.0\RestWithASPNETUdemy.genruntimeconfig.cache
+C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.Versioning.dll
+C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\bin\Debug\net5.0\db\migrations\V1_0_1__Create_table.sql
+C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\bin\Debug\net5.0\db\migrations\V1_0_2__Alter_table.sql
+C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\bin\Debug\net5.0\db\migrations\V1_0_3__Inserting_Data.sql
+C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\bin\Debug\net5.0\db\migrations\V1_0_4__Create_table_books.sql
+C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\bin\Debug\net5.0\db\migrations\V1_0_5__Inserting_books.sql
+C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\bin\Debug\net5.0\db\migrations\V1_0_6__Recreating_books.sql
+C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\bin\Debug\net5.0\db\migrations\V1_0_7__Create_table_users.sql
