@@ -31,7 +31,7 @@ namespace RestWithASPNETUdemy.Controllers
         {
             var person = _personBusiness.FindById(id);
 
-            if (person == null)
+            if (person?.Id == null)
                 return NotFound($"Person not found with id {id}");
 
             return Ok(person);
@@ -49,13 +49,18 @@ namespace RestWithASPNETUdemy.Controllers
         [HttpPut]
         public IActionResult Put([FromBody] PersonVO person)
         {
-            if (person == null)
+            if (person == null || person.Id <= 0)
                 return BadRequest("Invalid person");
+            
+            var personEntity = _personBusiness.FindById(person.Id.Value); 
+
+            if (personEntity == null)
+                return NotFound($"Person with id {person.Id.Value} not found");
 
             return new ObjectResult(_personBusiness.Update(person));
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
             var person = _personBusiness.FindById(id);
