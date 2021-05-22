@@ -8,12 +8,12 @@ using RestWithASPNETUdemy.Models.Context;
 
 namespace RestWithASPNETUdemy.Repository.Generic
 {
-    public abstract class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
+    public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        protected readonly MySQLContext _context;
-        private DbSet<T> _entity;
+        private readonly MySQLContext _context;
+        private readonly DbSet<T> _entity;
         
-        protected BaseRepository(MySQLContext context)
+        public BaseRepository(MySQLContext context)
         {
             _context = context;
             _entity = _context.Set<T>();

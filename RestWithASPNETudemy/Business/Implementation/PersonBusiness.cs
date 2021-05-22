@@ -2,16 +2,17 @@ using System;
 using System.Collections.Generic;
 using RestWithASPNETUdemy.Data.Converter;
 using RestWithASPNETUdemy.Data.VO;
-using RestWithASPNETUdemy.Repository;
+using RestWithASPNETUdemy.Models;
+using RestWithASPNETUdemy.Repository.Generic;
 
 namespace RestWithASPNETUdemy.Business.Implementation
 {
     public class PersonBusiness : IPersonBusiness
     {
-        private readonly IPersonRepository _repo;
+        private readonly IBaseRepository<Person> _repo;
         private readonly PersonConverter _converter;
 
-        public PersonBusiness(IPersonRepository repo)
+        public PersonBusiness(IBaseRepository<Person> repo)
         {
             _repo = repo;
             _converter = new PersonConverter();

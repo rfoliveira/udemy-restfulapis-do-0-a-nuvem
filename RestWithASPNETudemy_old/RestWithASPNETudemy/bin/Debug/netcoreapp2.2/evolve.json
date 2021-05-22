@@ -1,6 +1,0 @@
-{
-  "Evolve.Database": "mysql",
-  "Evolve.ConnectionString": "Server=localhost;Database=rest_with_asp_net_udemy;uid=root;pwd=masterdba",
-  "Evolve.Locations": "db",
-  "Evolve.Command": "migrate"
-}

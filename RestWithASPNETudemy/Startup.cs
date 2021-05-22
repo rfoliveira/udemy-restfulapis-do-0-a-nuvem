@@ -38,9 +38,7 @@ namespace RestWithASPNETUdemy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Senha de root no mysql local = p@$$w0rd
             var connectionString = Configuration.GetConnectionString("MySQLConnectionString");
-            _logger.Log(LogLevel.Information, $"ConnectionString = {connectionString}");
 
             if (Environment.IsDevelopment())
             {
@@ -81,6 +79,7 @@ namespace RestWithASPNETUdemy
                 options.UseMySql(connectionString, Microsoft.EntityFrameworkCore.MySqlServerVersion.LatestSupportedServerVersion);
             });
 
+            services.AddApiVersioning();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
