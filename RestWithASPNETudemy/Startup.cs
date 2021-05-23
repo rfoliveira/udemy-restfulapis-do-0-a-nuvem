@@ -5,9 +5,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 using RestWithASPNETUdemy.Business;
 using RestWithASPNETUdemy.Business.Implementation;
+using RestWithASPNETUdemy.Hypermedia.Enricher;
+using RestWithASPNETUdemy.Hypermedia.Filters;
 using RestWithASPNETUdemy.Models.Context;
 using RestWithASPNETUdemy.Repository.Generic;
 
@@ -79,19 +82,63 @@ namespace RestWithASPNETUdemy
                 options.UseMySql(connectionString, Microsoft.EntityFrameworkCore.MySqlServerVersion.LatestSupportedServerVersion);
             });
 
+            // Para permitir a saída também como xml
+            // Para testar, deve-se atribuir no header da requisição como 
+            // Accept = "application/xml" (ou Accept = "application/json")
+            // --------------------------------------------------------------------------------------------
+            // Este método funciona também e diz em sua documentação 
+            // que possui o mínimo para executar relacionado ao AspNetMvc e por conter o mínimo,
+            // eu fiz a troca de "services.AddMvc(...)" para "services.AddMvcCore(...)".
+            // Documentação:
+            // -------------
+            // Adds the minimum essential MVC services to the specified IServiceCollection. 
+            // Additional services including MVC's support for authorization, formatters, 
+            // and validation must be added separately using the IMvcCoreBuilder returned from this method.
+            services.AddMvcCore(options => 
+            {
+                // Para que aceite o parâmetro "Accept" no header
+                options.RespectBrowserAcceptHeader = true;
+                options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("application/xml"));
+                options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json"));
+            })
+            .AddXmlSerializerFormatters();
+
+            RegisterHATEOAS(services);
+
             services.AddApiVersioning();
+            
+            // Habilitando o CORS
+            services.AddCors(options => 
+            {
+                options.AddDefaultPolicy(builder => 
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
+            });
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "RESTful API With ASP.NET Core 2.2", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "RESTful API With ASP.NET Core 5.0", Version = "v1" });
             });
 
             RegisterDIContainer(services);
         }
 
+        private void RegisterHATEOAS(IServiceCollection services)
+        {
+            var filterOptions = new HypermediaFilterOptions();
+            filterOptions.ContentResponseEnricherList.Add(new PersonEnricher());
+
+            services.AddSingleton(filterOptions);
+        }
+
         private void RegisterDIContainer(IServiceCollection services)
         {
             services.AddScoped<IPersonBusiness, PersonBusiness>();
+            services.AddScoped<IBookBusiness, BookBusiness>();
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
         }
 
@@ -107,12 +154,14 @@ namespace RestWithASPNETUdemy
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RestWithASPNETUdemy v1"));
 
             app.UseRouting();
+            app.UseCors();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapControllerRoute("DefaultApi", "{controller=values}/{id?}");
             });
         }
     }

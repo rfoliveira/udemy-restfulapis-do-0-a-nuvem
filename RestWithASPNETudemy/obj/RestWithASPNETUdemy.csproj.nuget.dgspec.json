@@ -48,9 +48,13 @@
               "target": "Package",
               "version": "[3.0.0, )"
             },
+            "Microsoft.AspNetCore.Mvc.Formatters.Xml": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.AspNetCore.Mvc.Versioning": {
               "target": "Package",
-              "version": "[5.0.0, )"
+              "version": "[4.1.1, )"
             },
             "MySql.Data": {
               "target": "Package",
@@ -63,6 +67,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.6.3, )"
+            },
+            "Tapioca.HATEOAS": {
+              "target": "Package",
+              "version": "[1.0.4, )"
             }
           },
           "imports": [
