@@ -1,9 +1,10 @@
+using RestWithASPNETUdemy.Data.VO;
 using RestWithASPNETUdemy.Models;
 
 namespace RestWithASPNETUdemy.Repository
 {
     public interface IUserRepository
     {
-         User FindByLogin(string login);
+         User ValidateCredentials(UserVO user);
     }
 }

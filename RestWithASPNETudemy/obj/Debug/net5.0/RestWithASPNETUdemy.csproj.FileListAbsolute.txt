@@ -58,3 +58,11 @@ C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\obj\Debug\net
 C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\obj\Debug\net5.0\ref\RestWithASPNETUdemy.dll
 C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\obj\Debug\net5.0\RestWithASPNETUdemy.pdb
 C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\obj\Debug\net5.0\RestWithASPNETUdemy.genruntimeconfig.cache
+C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\bin\Debug\net5.0\db\migrations\V1_0_8__Recreate_table_users.sql
+C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Evolve" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Xml" Version="2.2.0" />
     <!-- 
       A versão 5.0.0 é a mais atual no momento e funciona perfeitamente. O único problema é que 
