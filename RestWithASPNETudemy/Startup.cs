@@ -1,3 +1,6 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -5,14 +8,21 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 using RestWithASPNETUdemy.Business;
 using RestWithASPNETUdemy.Business.Implementation;
+using RestWithASPNETUdemy.Configurations;
 using RestWithASPNETUdemy.Hypermedia.Enricher;
 using RestWithASPNETUdemy.Hypermedia.Filters;
 using RestWithASPNETUdemy.Models.Context;
+using RestWithASPNETUdemy.Repository;
 using RestWithASPNETUdemy.Repository.Generic;
+using RestWithASPNETUdemy.Repository.Implementation;
+using RestWithASPNETUdemy.Security;
+using RestWithASPNETUdemy.Security.Implementation;
 
 namespace RestWithASPNETUdemy
 {
@@ -41,6 +51,8 @@ namespace RestWithASPNETUdemy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            RegisterTokenConfiguration(services);
+
             var connectionString = Configuration.GetConnectionString("MySQLConnectionString");
 
             if (Environment.IsDevelopment())
@@ -127,6 +139,48 @@ namespace RestWithASPNETUdemy
             RegisterDIContainer(services);
         }
 
+        private void RegisterTokenConfiguration(IServiceCollection services)
+        {
+            var tokenConfiguration = new TokenConfiguration();
+
+            new ConfigureFromConfigurationOptions<TokenConfiguration>(
+                Configuration.GetSection("TokenConfiguration")
+            )
+            .Configure(tokenConfiguration);
+
+            services.AddSingleton(tokenConfiguration);
+
+            services.AddAuthentication(authOptions => 
+            {
+                authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(bearerOptions => 
+            {
+                bearerOptions.TokenValidationParameters = new TokenValidationParameters 
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = tokenConfiguration.Issuer,
+                    ValidAudience = tokenConfiguration.Audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenConfiguration.Secret))
+                };
+            });
+
+            // Ativa o uso do token como forma de autorizar o acesso
+            // a recursos desse projeto
+            services.AddAuthorization(auth => 
+            {
+                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser()
+                    .Build()
+                );
+            });
+        }
+
         private void RegisterHATEOAS(IServiceCollection services)
         {
             var filterOptions = new HypermediaFilterOptions();
@@ -137,9 +191,12 @@ namespace RestWithASPNETUdemy
 
         private void RegisterDIContainer(IServiceCollection services)
         {
+            services.AddScoped<ILoginBusiness, LoginBusiness>();
             services.AddScoped<IPersonBusiness, PersonBusiness>();
             services.AddScoped<IBookBusiness, BookBusiness>();
+            services.AddTransient<IToken, Token>();
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddScoped<IUserRepository, UserRepository>();           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

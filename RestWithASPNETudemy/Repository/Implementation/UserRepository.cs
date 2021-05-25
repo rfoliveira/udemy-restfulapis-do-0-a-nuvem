@@ -64,5 +64,24 @@ namespace RestWithASPNETUdemy.Repository.Implementation
 
             return userEntity;
         }
+
+        public User ValidateCredentials(string username)
+        {
+            return _context.Users.FirstOrDefault(u => u.Username == username);
+        }
+
+        public bool RevokeToken(string username)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Username == username);
+
+            if (user == null)
+                return false;
+
+            user.RefreshToken = null;
+            user.RefreshTokenExpiryTime = DateTime.Now.AddSeconds(-1);
+            _context.SaveChanges();
+
+            return true;
+        }
     }
 }
