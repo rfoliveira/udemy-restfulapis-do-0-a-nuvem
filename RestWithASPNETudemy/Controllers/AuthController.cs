@@ -5,6 +5,16 @@ using RestWithASPNETUdemy.Data.VO;
 
 namespace RestWithASPNETUdemy.Controllers
 {
+    /*
+        Links relevantes sobre refresh token e cancellation / revoke token
+        -------------------------------------------------------------------
+        
+        .NET 5 + ASP.NET Core + JWT + Refresh Tokens: exemplo de implementação - Renato Groffe - 24/05/2021
+        https://renatogroffe.medium.com/net-5-asp-net-core-jwt-refresh-tokens-exemplo-de-implementa%C3%A7%C3%A3o-fe885ecbaa4e
+
+        Canceling JWT tokens in .NET Core - Piotr Gankiewicz - 25/04/2018
+        https://piotrgankiewicz.com/2018/04/25/canceling-jwt-tokens-in-net-core/
+    */
     [ApiVersion("1.0")]
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
