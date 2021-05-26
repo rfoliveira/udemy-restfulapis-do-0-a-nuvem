@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using RestWithASPNETUdemy.Models;
 using RestWithASPNETUdemy.Models.Context;
@@ -29,5 +30,9 @@ namespace RestWithASPNETUdemy.Repository.Implementation
 
             return personEntity;
         }
+
+        public List<Person> FindByName(string name) => context.Persons.Where(p => (p.Firstname + p.Lastname).Contains(name)).ToList();
+
+        
     }
 }

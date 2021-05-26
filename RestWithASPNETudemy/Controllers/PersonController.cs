@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,12 +25,17 @@ namespace RestWithASPNETUdemy.Controllers
             _personBusiness = personBusiness;
         }
 
-        [HttpGet]
+        [HttpGet("{sortDirection}/{pageSize}/{page}")]
         [TypeFilter(typeof(HypermediaFilter))]
         [ProducesResponseType(typeof(IEnumerable<PersonVO>), (int)HttpStatusCode.OK)]
-        public IActionResult Get()
+        public IActionResult Get(
+            [FromQuery] string name,
+            string sortDirection,
+            int pageSize,
+            int page
+        )
         {
-            var persons = _personBusiness.FindAll();
+            var persons = _personBusiness.FindWithPagedSearch(name, sortDirection, pageSize, page);
             return Ok(persons);
         }
 
@@ -45,6 +51,21 @@ namespace RestWithASPNETUdemy.Controllers
                 return NotFound($"Person not found with id {id}");
 
             return Ok(person);
+        }
+
+        [HttpGet]
+        [TypeFilter(typeof(HypermediaFilter))]
+        [ProducesResponseType(typeof(IEnumerable<PersonVO>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [Route("findbyname")]
+        public IActionResult Get([FromQuery] string name)
+        {
+            var persons = _personBusiness.FindByName(name);
+
+            if (persons.Count() == 0)
+                return NotFound($"Person with name {name} not found");
+
+            return Ok(persons);
         }
 
         [HttpPost]
@@ -103,6 +124,6 @@ namespace RestWithASPNETUdemy.Controllers
                 return NotFound($"Person with id {id} not found");
 
             return Ok(person);
-        }    
+        }
     }
 }

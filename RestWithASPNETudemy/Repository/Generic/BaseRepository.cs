@@ -103,6 +103,27 @@ namespace RestWithASPNETUdemy.Repository.Generic
             return _entity.FirstOrDefault(e => e.Id == id);
         }
 
+        #region Métodos de paginação
+        public List<T> FindWithPagedSearch(string query) => _entity.FromSqlRaw<T>(query).ToList();
+
+        public int GetCount(string query)
+        {
+            var result = string.Empty;
+
+            using (var conn = context.Database.GetDbConnection())
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = query;
+                    result = cmd.ExecuteScalar().ToString();
+                }
+            }
+
+            return int.Parse(result);
+        }
+        #endregion
+
         public T Update(T entity)
         {
             var newEntity = _entity.FirstOrDefault(e => e.Id == entity.Id);
