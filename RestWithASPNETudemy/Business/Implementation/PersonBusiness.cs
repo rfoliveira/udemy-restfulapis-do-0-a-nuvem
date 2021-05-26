@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using RestWithASPNETUdemy.Data.Converter;
 using RestWithASPNETUdemy.Data.VO;
 using RestWithASPNETUdemy.Models;
+using RestWithASPNETUdemy.Repository;
 using RestWithASPNETUdemy.Repository.Generic;
 
 namespace RestWithASPNETUdemy.Business.Implementation
 {
     public class PersonBusiness : IPersonBusiness
     {
-        private readonly IBaseRepository<Person> _repo;
+        // private readonly IBaseRepository<Person> _repo;
+        private readonly IPersonRepository _repo;
         private readonly PersonConverter _converter;
 
-        public PersonBusiness(IBaseRepository<Person> repo)
+        public PersonBusiness()
+        {
+        }
+
+        public PersonBusiness(IPersonRepository repo)
         {
             _repo = repo;
             _converter = new PersonConverter();
@@ -46,6 +52,8 @@ namespace RestWithASPNETUdemy.Business.Implementation
         }
 
         public void Delete(long id) => _repo.Delete(id);
+
+        public PersonVO Disable(long id) => _converter.Parse(_repo.Disable(id));
 
         public bool Exists(long id) => _repo.Exists(id);
         

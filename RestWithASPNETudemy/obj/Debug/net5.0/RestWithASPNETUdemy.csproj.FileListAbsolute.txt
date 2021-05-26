@@ -67,3 +67,4 @@ C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\obj\Debug\net
 C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\obj\Debug\net5.0\ref\RestWithASPNETUdemy.dll
 C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\obj\Debug\net5.0\RestWithASPNETUdemy.pdb
 C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\obj\Debug\net5.0\RestWithASPNETUdemy.genruntimeconfig.cache
+C:\cursos\udemy\udemy-restfulapis-do-0-a-nuvem\RestWithASPNETUdemy\bin\Debug\net5.0\db\migrations\V1_0_10__Adding_column_enabled.sql

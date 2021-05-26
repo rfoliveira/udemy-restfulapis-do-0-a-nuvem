@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -24,6 +26,7 @@ namespace RestWithASPNETUdemy.Controllers
 
         [HttpGet]
         [TypeFilter(typeof(HypermediaFilter))]
+        [ProducesResponseType(typeof(IEnumerable<PersonVO>), (int)HttpStatusCode.OK)]
         public IActionResult Get()
         {
             var persons = _personBusiness.FindAll();
@@ -32,6 +35,8 @@ namespace RestWithASPNETUdemy.Controllers
 
         [HttpGet("{id}")]
         [TypeFilter(typeof(HypermediaFilter))]
+        [ProducesResponseType(typeof(PersonVO), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public IActionResult Get(long id)
         {
             var person = _personBusiness.FindById(id);
@@ -44,6 +49,8 @@ namespace RestWithASPNETUdemy.Controllers
 
         [HttpPost]
         [TypeFilter(typeof(HypermediaFilter))]
+        [ProducesResponseType(typeof(PersonVO), (int)HttpStatusCode.Created)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public IActionResult Post([FromBody] PersonVO person)
         {
             if (person == null)
@@ -54,6 +61,9 @@ namespace RestWithASPNETUdemy.Controllers
 
         [HttpPut]
         [TypeFilter(typeof(HypermediaFilter))]
+        [ProducesResponseType(typeof(PersonVO), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public IActionResult Put([FromBody] PersonVO person)
         {
             if (person == null || person.Id <= 0)
@@ -69,15 +79,30 @@ namespace RestWithASPNETUdemy.Controllers
 
         // DELETE não precisa de filtro porque não retorna nada
         [HttpDelete("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public IActionResult Delete(long id)
         {
             var person = _personBusiness.FindById(id);
-
             if (person == null)
                 return NotFound($"Person with id {id} not found");
             
             _personBusiness.Delete(id);
             return NoContent();
         }
+
+        [HttpPatch("{id}")]
+        [ProducesResponseType(typeof(PersonVO), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [TypeFilter(typeof(HypermediaFilter))]
+        public IActionResult Disable(long id)
+        {
+            var person = _personBusiness.Disable(id);
+
+            if (person == null)
+                return NotFound($"Person with id {id} not found");
+
+            return Ok(person);
+        }    
     }
 }

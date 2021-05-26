@@ -17,7 +17,8 @@ namespace RestWithASPNETUdemy.Data.Converter
                 Firstname = origin.Firstname,
                 Lastname = origin.Lastname,
                 Address = origin.Address,
-                Genre = origin.Genre
+                Genre = origin.Genre,
+                Enabled = origin.Enabled
             };
         }
 
@@ -31,7 +32,8 @@ namespace RestWithASPNETUdemy.Data.Converter
                 Firstname = origin.Firstname,
                 Lastname = origin.Lastname,
                 Address = origin.Address,
-                Genre = origin.Genre
+                Genre = origin.Genre,
+                Enabled = origin.Enabled
             };
         }
 

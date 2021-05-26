@@ -196,6 +196,7 @@ namespace RestWithASPNETUdemy
             services.AddScoped<IBookBusiness, BookBusiness>();
             services.AddTransient<IToken, Token>();
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped<IUserRepository, UserRepository>();           
         }
 

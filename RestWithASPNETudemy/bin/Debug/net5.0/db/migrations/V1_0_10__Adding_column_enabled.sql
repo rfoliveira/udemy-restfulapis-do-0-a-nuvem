@@ -1,0 +1,1 @@
+﻿alter table `persons` add column `enabled` bit(1) not null default b'1' after `genre`;

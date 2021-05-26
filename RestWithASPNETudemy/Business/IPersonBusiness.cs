@@ -11,5 +11,6 @@ namespace RestWithASPNETUdemy.Business
          PersonVO Update(PersonVO person);
          void Delete(long id);
          bool Exists(long id);
+         PersonVO Disable(long id);
     }
 }

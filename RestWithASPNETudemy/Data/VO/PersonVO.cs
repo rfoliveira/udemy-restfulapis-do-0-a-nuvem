@@ -12,5 +12,6 @@ namespace RestWithASPNETUdemy.Data.VO
         public string Address { get; set; }
         public string Genre { get; set; }
         public List<HypermediaLink> Links { get; set; } = new List<HypermediaLink>(); 
+        public bool Enabled { get; set; }
     }
 }

@@ -10,13 +10,13 @@ namespace RestWithASPNETUdemy.Repository.Generic
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        private readonly MySQLContext _context;
+        protected readonly MySQLContext context;
         private readonly DbSet<T> _entity;
         
         public BaseRepository(MySQLContext context)
         {
-            _context = context;
-            _entity = _context.Set<T>();
+            this.context = context;
+            _entity = this.context.Set<T>();
         }
 
         public T Create(T entity)
@@ -24,7 +24,7 @@ namespace RestWithASPNETUdemy.Repository.Generic
             try
             {
                 _entity.Add(entity);
-                _context.SaveChanges();
+                context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException) 
             {
@@ -57,7 +57,7 @@ namespace RestWithASPNETUdemy.Repository.Generic
                 if (oldEntity != null)
                 {
                     _entity.Remove(oldEntity);
-                    _context.SaveChanges();
+                    context.SaveChanges();
                 }
             }
             catch (DbUpdateConcurrencyException) 
@@ -111,8 +111,8 @@ namespace RestWithASPNETUdemy.Repository.Generic
             {
                 if (newEntity != null)
                 {
-                    _context.Entry(newEntity).CurrentValues.SetValues(entity);
-                    _context.SaveChanges();
+                    context.Entry(newEntity).CurrentValues.SetValues(entity);
+                    context.SaveChanges();
                 }
             }
             catch (DbUpdateConcurrencyException) 
