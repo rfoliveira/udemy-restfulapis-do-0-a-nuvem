@@ -1,4 +1,5 @@
-﻿insert into persons (firstname, lastname, address, genre, enabled) values ('Harmonia', 'Burnall', '1 Crownhardt Parkway', 'Agender', true);
+﻿-- Gerado no site https://www.mockaroo.com/
+insert into persons (firstname, lastname, address, genre, enabled) values ('Harmonia', 'Burnall', '1 Crownhardt Parkway', 'Agender', true);
 insert into persons (firstname, lastname, address, genre, enabled) values ('Sid', 'Filler', '73 Crowley Trail', 'Genderfluid', false);
 insert into persons (firstname, lastname, address, genre, enabled) values ('Sergei', 'Dearn', '4501 Mcbride Pass', 'Non-binary', true);
 insert into persons (firstname, lastname, address, genre, enabled) values ('Reidar', 'Crebo', '49 7th Pass', 'Non-binary', true);
