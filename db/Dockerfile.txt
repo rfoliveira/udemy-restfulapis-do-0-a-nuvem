@@ -1,0 +1,8 @@
+FROM mysql:8.0.25
+EXPOSE 3306
+
+# para copiar os scripts da migrations para dentro do container
+COPY ./RestWithASPNETUdemy/db/migrations/ /home/database/
+
+# Para executar os scripts de migrations de dentro do container
+COPY ./RestWithASPNETUdemy/db/ci/init_database.sh /docker-entrypoint-initdb.d/init_database.sh

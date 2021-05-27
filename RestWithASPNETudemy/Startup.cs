@@ -57,7 +57,9 @@ namespace RestWithASPNETUdemy
 
             var connectionString = Configuration.GetConnectionString("MySQLConnectionString");
 
-            if (Environment.IsDevelopment())
+            // Mudei para "IsProduction" para não rodar o migrations em "Development"
+            // e não precisar comentar tudo isso aqui, já que o docker vai executar os arquivos ".sql"
+            if (Environment.IsProduction())
             {
                 #region Configuração do migrations do Evolve
                 try
