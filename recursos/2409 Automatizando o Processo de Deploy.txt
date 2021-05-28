@@ -1,0 +1,1 @@
+az ad sp create-for-rbac --name "<SERVICE_PRINCIPAL_NAME>" --role contributor --scopes /subscriptions/<SUBSCRIPTION>/resourceGroups/<GROUP>/providers/Microsoft.Web/sites/<RESOURCE_NAME> --sdk-auth

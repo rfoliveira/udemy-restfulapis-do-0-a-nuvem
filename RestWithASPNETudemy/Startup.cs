@@ -57,40 +57,10 @@ namespace RestWithASPNETUdemy
 
             var connectionString = Configuration.GetConnectionString("MySQLConnectionString");
 
-            // Mudei para "IsProduction" para não rodar o migrations em "Development"
-            // e não precisar comentar tudo isso aqui, já que o docker vai executar os arquivos ".sql"
-            if (Environment.IsProduction())
+            if (Environment.IsDevelopment())
             {
-                #region Configuração do migrations do Evolve
-                try
-                {
-                    /*
-                        No VS2019
-                        ----------
-                        O cara do vídeo usou o pomelo para conectar ao mysql porque no início do asp.net core não tinha
-                        um driver para mysql nem da M$ nem da oracle (agora tem mas não suporta asp.net core 2.0).
-                        Dessa forma, dá erro nesta linha pois o compilador identifica tanto o MySqlConnection, 
-                        quanto o MySqlConnector do pomelo.
-                        Com isso, foi acrescentado ao csproj um alias para resolver as referencias usando o MySqlConnector.
-                        Obs.: isso vai ferrar com as demais referências do projeto, 
-                        fechando e abrindo novamente o VS2019, ou ou mudar para o modo pasta e depois retornar para o modo solution, 
-                        recarregando o projeto. :-S
-                    */
-                    var evolveConnection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
-                    var evolve = new Evolve.Evolve(evolveConnection, msg => _logger.LogInformation(msg))
-                    {
-                        Locations = new[] { "db/migrations" },
-                        IsEraseDisabled = true
-                    };
-
-                    evolve.Migrate();
-                }
-                catch (System.Exception ex)
-                {
-                     _logger.LogCritical("Database migration failed", ex);
-                     throw;
-                }
-                #endregion
+                // Depois de fazer a carga no azure, comentar para não executar no docker-compose
+                // MigrateDatabase(connectionString);
             }
 
             services.AddDbContext<MySQLContext>(options => 
@@ -141,6 +111,38 @@ namespace RestWithASPNETUdemy
             });
 
             RegisterDIContainer(services);
+        }
+
+        private void MigrateDatabase(string connectionString)
+        {
+            try
+            {
+                /*
+                    No VS2019
+                    ----------
+                    O cara do vídeo usou o pomelo para conectar ao mysql porque no início do asp.net core não tinha
+                    um driver para mysql nem da M$ nem da oracle (agora tem mas não suporta asp.net core 2.0).
+                    Dessa forma, dá erro nesta linha pois o compilador identifica tanto o MySqlConnection, 
+                    quanto o MySqlConnector do pomelo.
+                    Com isso, foi acrescentado ao csproj um alias para resolver as referencias usando o MySqlConnector.
+                    Obs.: isso vai ferrar com as demais referências do projeto, 
+                    fechando e abrindo novamente o VS2019, ou ou mudar para o modo pasta e depois retornar para o modo solution, 
+                    recarregando o projeto. :-S
+                */
+                var evolveConnection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+                var evolve = new Evolve.Evolve(evolveConnection, msg => _logger.LogInformation(msg))
+                {
+                    Locations = new[] { "db/migrations" },
+                    IsEraseDisabled = true
+                };
+
+                evolve.Migrate();
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogCritical("Database migration failed", ex);
+                throw;
+            }
         }
 
         private void RegisterTokenConfiguration(IServiceCollection services)
