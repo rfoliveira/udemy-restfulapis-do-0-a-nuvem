@@ -55,12 +55,14 @@ namespace RestWithASPNETUdemy
         {
             RegisterTokenConfiguration(services);
 
-            var connectionString = Configuration.GetConnectionString("MySQLConnectionString");
+            var connectionString = Configuration.GetConnectionString("MySQLLocalConnectionString");
 
             if (Environment.IsDevelopment())
             {
-                // Depois de fazer a carga no azure, comentar para não executar no docker-compose
-                // MigrateDatabase(connectionString);
+                // Comentado porque pelo docker a criação dos scripts não é feita por migrations
+                // mas sim executando diretamente dentro do container.
+                // Para inserir no banco na nuvem, descomentar execeutar apontando para o banco na nuvem
+                MigrateDatabase(connectionString);
             }
 
             services.AddDbContext<MySQLContext>(options => 
