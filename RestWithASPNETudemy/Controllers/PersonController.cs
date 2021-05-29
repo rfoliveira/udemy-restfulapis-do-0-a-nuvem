@@ -118,6 +118,9 @@ namespace RestWithASPNETUdemy.Controllers
         [TypeFilter(typeof(HypermediaFilter))]
         public IActionResult Disable(long id)
         {
+            if (id <= 0)
+                return BadRequest("Invalid person id");
+
             var person = _personBusiness.Disable(id);
 
             if (person == null)
