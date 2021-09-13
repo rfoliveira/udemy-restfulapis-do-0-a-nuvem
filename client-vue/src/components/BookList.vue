@@ -108,14 +108,17 @@
 
 <script>
 export default {
+    props: ['username'],
     name: 'BookList',
     data() {
         return {
-            username: ''
+            booklist: []
         }
     },
     methods: {
-
+        getBooks() {
+            
+        }
     }
 }
 </script>

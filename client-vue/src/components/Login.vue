@@ -6,15 +6,13 @@
         <form @submit.prevent="doLogin">
             <h1>Access your account</h1>
 
-            <input placeholder="Username"
-                :value="username"
-                @change="setUsername" />
+            <input placeholder="Username" v-model="username" />
 
             <input type="password" 
                 placeholder="Password"
-                @change="setPassword" />
+                v-model="password" />
 
-            <button class="button" type="submit">Login</button>
+            <button @click="doLogin()">Login</button>
         </form>
     </section>
 
@@ -34,12 +32,6 @@ export default {
         }
     },
     methods: {
-        setUsername(e) {
-            this.username = e.target.value;
-        },
-        setPassword(e) {
-            this.password = e.target.value;
-        },
         doLogin() {
             var data = {
                 username: this.username, 
@@ -48,7 +40,7 @@ export default {
 
             console.log('Dados a serem enviados: ', data);
 
-            // envia os dados via post
+            // envia os dados via axios.post
         }
     }
 }
