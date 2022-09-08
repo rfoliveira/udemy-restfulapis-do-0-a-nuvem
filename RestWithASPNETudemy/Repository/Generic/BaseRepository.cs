@@ -48,7 +48,7 @@ namespace RestWithASPNETUdemy.Repository.Generic
             return entity;
         }
 
-        public void Delete(long id)
+        public void Delete(int id)
         {
             try
             {
@@ -80,7 +80,7 @@ namespace RestWithASPNETUdemy.Repository.Generic
             }
         }
 
-        public bool Exists(long? id)
+        public bool Exists(int? id)
         {
             return _entity.Any(e => e.Id == id);
         }
@@ -98,7 +98,7 @@ namespace RestWithASPNETUdemy.Repository.Generic
             return _entity.ToList();
         }
 
-        public T FindById(long id)
+        public T FindById(int id)
         {
             return _entity.FirstOrDefault(e => e.Id == id);
         }

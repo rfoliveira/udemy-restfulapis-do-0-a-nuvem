@@ -25,15 +25,15 @@ namespace RestWithASPNETUdemy.Business.Implementation
             return _converter.Parse(bookEntity);
         }
 
-        public void Delete(long id) => _repo.Delete(id);
+        public void Delete(int id) => _repo.Delete(id);
 
-        public bool Exists(long id) => _repo.Exists(id);
+        public bool Exists(int id) => _repo.Exists(id);
 
         public IEnumerable<BookVO> FindAll() => _converter.ParseList(_repo.FindAll());
 
         public IEnumerable<BookVO> FindByAuthor(string author) => _converter.ParseList(_repo.FindByAuthor(author));
 
-        public BookVO FindById(long id) => _converter.Parse(_repo.FindById(id));
+        public BookVO FindById(int id) => _converter.Parse(_repo.FindById(id));
 
         public PagedSearchVO<BookVO> FindWithPagedSearch(string title, string sortDirection, int pagesize, int page)
         {

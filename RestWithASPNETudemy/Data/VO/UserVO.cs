@@ -4,7 +4,7 @@ namespace RestWithASPNETUdemy.Data.VO
 {
     public class UserVO
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string Fullname { get; set; }

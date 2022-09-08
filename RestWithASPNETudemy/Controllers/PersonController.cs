@@ -43,7 +43,7 @@ namespace RestWithASPNETUdemy.Controllers
         [TypeFilter(typeof(HypermediaFilter))]
         [ProducesResponseType(typeof(PersonVO), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public IActionResult Get(long id)
+        public IActionResult Get(int id)
         {
             var person = _personBusiness.FindById(id);
 
@@ -102,7 +102,7 @@ namespace RestWithASPNETUdemy.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public IActionResult Delete(long id)
+        public IActionResult Delete(int id)
         {
             var person = _personBusiness.FindById(id);
             if (person == null)
@@ -116,7 +116,7 @@ namespace RestWithASPNETUdemy.Controllers
         [ProducesResponseType(typeof(PersonVO), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [TypeFilter(typeof(HypermediaFilter))]
-        public IActionResult Disable(long id)
+        public IActionResult Disable(int id)
         {
             if (id <= 0)
                 return BadRequest("Invalid person id");

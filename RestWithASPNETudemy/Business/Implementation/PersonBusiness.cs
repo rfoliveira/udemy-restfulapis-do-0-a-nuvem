@@ -49,15 +49,15 @@ namespace RestWithASPNETUdemy.Business.Implementation
             }
         }
 
-        public void Delete(long id) => _repo.Delete(id);
+        public void Delete(int id) => _repo.Delete(id);
 
-        public PersonVO Disable(long id) => _converter.Parse(_repo.Disable(id));
+        public PersonVO Disable(int id) => _converter.Parse(_repo.Disable(id));
 
-        public bool Exists(long id) => _repo.Exists(id);
+        public bool Exists(int id) => _repo.Exists(id);
         
         public IEnumerable<PersonVO> FindAll() => _converter.ParseList(_repo.FindAll());
         
-        public PersonVO FindById(long id) => _converter.Parse(_repo.FindById(id));
+        public PersonVO FindById(int id) => _converter.Parse(_repo.FindById(id));
 
         public IEnumerable<PersonVO> FindByName(string name) => _converter.ParseList(_repo.FindByName(name));
 

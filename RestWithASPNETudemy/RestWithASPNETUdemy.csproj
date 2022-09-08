@@ -29,11 +29,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="db\migrations\V1_0_2__Alter_table.sql" />
-    <None Remove="db\migrations\V1_0_3__Inserting_Data.sql" />
-    <None Remove="db\migrations\V1_0_4__Create_table_books.sql" />
-    <None Remove="db\migrations\V1_0_6__recreating_books.sql" />
-    <None Remove="db\migrations\V1_0_7__Create_table_users.sql" />
+    <None Remove="db\migrations\V1_0_2__Create_table_books.sql" />
+    <None Remove="db\migrations\V1_0_5__Inserting_Data_persons.sql" />
   </ItemGroup>
 
   <ItemGroup>

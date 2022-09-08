@@ -1,8 +1,8 @@
 ﻿create table if not exists books (
-	id varchar(127) not null,
-	Author longtext,
+	Id int not null AUTO_INCREMENT,
+	Author longtext not null,
 	LaunchDate datetime(6) not null,
 	Price decimal(10,2) not null,
-	Title longtext,
-	primary key(id)
+	Title longtext not null,
+	primary key (Id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
